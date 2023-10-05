@@ -4,7 +4,7 @@ using HelloBlazor.Shared;
 namespace HelloBlazor.Server.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("vejrudsigter")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -30,5 +30,19 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
     }
+
+    [HttpGet]
+    [Route("{n:int}")]
+    public IEnumerable<WeatherForecast> GetMany(int n)
+    {
+        return Enumerable.Range(1, n).Select(index => new WeatherForecast
+        {
+            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        })
+        .ToArray();
+    }
+
 }
 

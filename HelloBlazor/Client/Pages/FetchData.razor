@@ -35,14 +35,42 @@ else
             }
         </tbody>
     </table>
+    <button @onclick="More">More</button>
+    <button @onclick="Less">Less</button>
 }
 
 @code {
     private WeatherForecast[]? forecasts;
+    private List<WeatherForecast> cache = new List<WeatherForecast>();
+
+    int amount = 2;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        await Update();
+
     }
-}
+
+    async Task Update()
+    { if (amount > cache.Count)
+        {
+
+            var newWf = await Http.GetFromJsonAsync<WeatherForecast[]>($"vejrudsigter/{amount-cache.Count}");
+            cache.AddRange(newWf);
+        }
+        forecasts = cache.Take<WeatherForecast>(amount).ToArray();
+    }
+
+    async Task More() {
+        amount++;
+        await Update();
+    }
+
+    async Task Less()
+    {
+        if (amount > 1) amount--;
+        await Update();
+
+    }
+    }
 
