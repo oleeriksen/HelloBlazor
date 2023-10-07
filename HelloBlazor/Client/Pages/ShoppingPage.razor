@@ -81,7 +81,6 @@
 
     private async Task AddShoppingItem() {
         await Http.PostAsJsonAsync<ShoppingItem>("api/shopping/add", shoppingItem);
-
         Console.WriteLine("Klient: add " + shoppingItem.Name + " " + shoppingItem.Price);
         shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
         shoppingItem = new(); // clear fields in form

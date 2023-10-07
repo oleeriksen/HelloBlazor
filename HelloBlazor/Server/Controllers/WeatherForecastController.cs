@@ -31,6 +31,7 @@ public class WeatherForecastController : ControllerBase
         .ToArray();
     }
 
+<<<<<<< Updated upstream
     [HttpGet]
     [Route("{n:int}")]
     public IEnumerable<WeatherForecast> GetMany(int n)
@@ -44,5 +45,8 @@ public class WeatherForecastController : ControllerBase
         .ToArray();
     }
 
+=======
+ 
+>>>>>>> Stashed changes
 }
 
