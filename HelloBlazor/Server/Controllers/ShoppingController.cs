@@ -12,28 +12,23 @@ namespace HelloBla.Server.Controllers
     [Route("api/Shopping")]
     public class ShoppingController : ControllerBase
     {
+        private IShoppingRepository mRepo;
 
-        private static ShoppingRepositoryInMemory mRepo = new();
+        public ShoppingController(IShoppingRepository repo){
+            mRepo = repo;
+        }
 
         [HttpGet]
         [Route("getall")]
-        public IEnumerable<ShoppingItem> GetAll()
-        {
-            Console.WriteLine("GetAll ");
-            //Thread.Sleep(3000);
+        public IEnumerable<ShoppingItem> GetAll(){
             return mRepo.GetAll();
         }
 
         [HttpPost]
         [Route("add")]
-        public void AddItem(ShoppingItem product)
-        {
-            Console.WriteLine("Post " + product.Name);
-            mRepo.AddItem(product);
-         
+        public void AddItem(ShoppingItem product){
+            mRepo.AddItem(product);  
         }
-
-
     }
 }
 

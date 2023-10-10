@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.ResponseCompression;
+﻿using HelloBlazor.Server.Repositories;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace HelloBlazor;
 
@@ -12,6 +13,8 @@ public class Program
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages();
+
+        builder.Services.AddSingleton<IShoppingRepository, ShoppingRepositoryInMemory>();
 
         var app = builder.Build();
 
