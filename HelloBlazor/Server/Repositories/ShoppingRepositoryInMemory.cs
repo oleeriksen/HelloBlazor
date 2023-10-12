@@ -14,6 +14,11 @@ namespace HelloBlazor.Server.Repositories
             mProducts.Add(item);
         }
 
+        public void DeleteByName(string name)
+        {
+            mProducts.RemoveAll((item) => item.Name.Equals(name));
+        }
+
         public ShoppingItem[] GetAll() => mProducts.ToArray();
   
     }

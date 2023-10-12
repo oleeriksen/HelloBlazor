@@ -29,6 +29,12 @@ namespace HelloBla.Server.Controllers
         public void AddItem(ShoppingItem product){
             mRepo.AddItem(product);  
         }
+
+        [HttpDelete]
+        [Route("delete/{name:alpha}")]
+        public void DeleteItem(string name) {
+            mRepo.DeleteByName(name);
+        }
     }
 }
 
