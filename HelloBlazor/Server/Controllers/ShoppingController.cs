@@ -31,10 +31,18 @@ namespace HelloBla.Server.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{name:alpha}")]
-        public void DeleteItem(string name) {
-            mRepo.DeleteByName(name);
+        [Route("delete/{id:int}")]
+        public void DeleteItem(int id) {
+            mRepo.DeleteById(id);
         }
+
+        [HttpPut]
+        [Route("update")]
+        public void UpdateItem(ShoppingItem product){
+            mRepo.UpdateItem(product);
+        }
+
+
     }
 }
 

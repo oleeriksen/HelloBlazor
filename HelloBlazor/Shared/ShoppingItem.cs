@@ -5,6 +5,7 @@ namespace HelloBlazor.Shared
 {
     public class ShoppingItem
     {
+        public int Id { get; set; }
         public string Name { get; set; } = "";
 
         public decimal Price { get; set; } = 0;
@@ -14,6 +15,8 @@ namespace HelloBlazor.Shared
         public string Description { get; set; } = "";
 
         public bool Done { get; set; } = false;
+
+        public string Shop { get; set; } = "";
     }
 }
 
