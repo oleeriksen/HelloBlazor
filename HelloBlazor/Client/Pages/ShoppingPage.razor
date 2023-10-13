@@ -95,5 +95,35 @@
         shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
         busyDisplayStyle = "none"; // sluk busy
     }
+<<<<<<< Updated upstream
+=======
+
+    private async Task DeleteShoppingItem(ShoppingItem item) {
+
+        await Http.DeleteAsync($"api/shopping/delete/{item.Id}");
+
+        shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
+
+    }
+
+    private async Task UpdateShoppingItem(ShoppingItem item)
+    {
+        item.Done = !item.Done;
+        await Http.PutAsJsonAsync<ShoppingItem>($"api/shopping/update", item);
+
+        //shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
+
+        //StateHasChanged();
+
+    }
+
+    private decimal TotalPrice {
+        get {
+            if (shoppingList == null)
+                return 0;
+            return shoppingList.Select(item => item.Amount * item.Price).Sum();
+        }
+    }
+>>>>>>> Stashed changes
 }
 

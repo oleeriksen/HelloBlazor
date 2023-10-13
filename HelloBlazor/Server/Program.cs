@@ -15,7 +15,7 @@ public class Program
         builder.Services.AddRazorPages();
 
         builder.Services.AddSingleton<IShoppingRepository, ShoppingRepositoryInMemory>();
-
+        builder.Services.AddSingleton<IBikeRepository, BikeRepositorySQLite>();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
