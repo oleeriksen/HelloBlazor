@@ -14,8 +14,17 @@ namespace HelloBlazor.Server.Repositories
             mProducts.Add(item);
         }
 
+        public void DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public ShoppingItem[] GetAll() => mProducts.ToArray();
-  
+
+        public void UpdateItem(ShoppingItem item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

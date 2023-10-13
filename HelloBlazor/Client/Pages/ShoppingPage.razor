@@ -95,8 +95,7 @@
         shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
         busyDisplayStyle = "none"; // sluk busy
     }
-<<<<<<< Updated upstream
-=======
+
 
     private async Task DeleteShoppingItem(ShoppingItem item) {
 
@@ -124,6 +123,5 @@
             return shoppingList.Select(item => item.Amount * item.Price).Sum();
         }
     }
->>>>>>> Stashed changes
 }
 
