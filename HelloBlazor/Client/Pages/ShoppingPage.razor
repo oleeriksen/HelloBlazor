@@ -100,7 +100,6 @@
     }
 
     private async Task AddShoppingItem() {
-        shoppingItem.Id = shoppingList.Count() + 1;
         await Http.PostAsJsonAsync<ShoppingItem>("api/shopping/add", shoppingItem);
         Console.WriteLine("Klient: add " + shoppingItem.Name + " " + shoppingItem.Price);
         shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");

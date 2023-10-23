@@ -11,6 +11,8 @@ namespace HelloBlazor.Server.Repositories
         };
 
         public void AddItem(ShoppingItem item){
+            int newId = mProducts.Select(x => x.Id).Max() + 1;
+            item.Id = newId;
             mProducts.Add(item);
         }
 
@@ -21,7 +23,7 @@ namespace HelloBlazor.Server.Repositories
         public ShoppingItem[] GetAll() => mProducts.ToArray();
 
         public void UpdateItem(ShoppingItem item){
-            mProducts.RemoveAll((x) => x.Id == item.Id);
+            DeleteById(item.Id);
             mProducts.Add(item);
         }
     }
