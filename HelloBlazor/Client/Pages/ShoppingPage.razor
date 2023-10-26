@@ -129,7 +129,7 @@
     private async Task UpdateShoppingItem(ShoppingItem item)
     {
         item.Done = !item.Done;
-        await Http.PutAsJsonAsync<ShoppingItem>($"api/shopping/update", item);
+        await Http.PutAsJsonAsync<ShoppingItem>("api/shopping/update", item);
 
         //shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
 
