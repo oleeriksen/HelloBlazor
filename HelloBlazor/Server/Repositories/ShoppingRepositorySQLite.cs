@@ -7,18 +7,38 @@ namespace HelloBlazor.Server.Repositories
 	public class ShoppingRepositorySQLite : IShoppingRepository
 	{
         private const string connectionString = @"Data Source=//Users/ole/Data/shopping.db";
-        public ShoppingRepositorySQLite()
-		{
+        public ShoppingRepositorySQLite(){
 		}
 
         public void AddItem(ShoppingItem item)
         {
-           
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+
+                command.CommandText = @"INSERT INTO shoppingitem (Name, Price, Amount, Description, Done, Shop) VALUES ($name, $price, $amount, $description, $done, $shop)";
+                command.Parameters.AddWithValue("$name", item.Name);
+                command.Parameters.AddWithValue("$price", item.Price);
+                command.Parameters.AddWithValue("$amount", item.Amount);
+                command.Parameters.AddWithValue("$description", item.Description);
+                command.Parameters.AddWithValue("$done", item.Done ? 1: 0);
+                command.Parameters.AddWithValue("$shop", item.Shop);
+                command.ExecuteNonQuery();
+            }
         }
 
         public void DeleteById(int id)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+
+                command.CommandText = @"DELETE FROM shoppingitem WHERE id = $id";
+                command.Parameters.AddWithValue("$id", id);
+                command.ExecuteNonQuery();
+            }
         }
 
         public ShoppingItem[] GetAll()
@@ -56,7 +76,16 @@ namespace HelloBlazor.Server.Repositories
 
         public void UpdateItem(ShoppingItem item)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+
+                command.CommandText = @"UPDATE shoppingitem SET Done = $done WHERE id = $id";
+                command.Parameters.AddWithValue("$id", item.Id);
+                command.Parameters.AddWithValue("$done", item.Done ? 1: 0);
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

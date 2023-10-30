@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HelloBlazor.Shared;
 using HelloBlazor.Server.Repositories;
 
-namespace HelloBla.Server.Controllers
+namespace HelloBlazor.Server.Controllers
 {
     [ApiController]
     [Route("api/Shopping")]
