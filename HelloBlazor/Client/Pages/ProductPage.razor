@@ -1,5 +1,6 @@
 ﻿@page "/product"
 @using HelloBlazor.Client.Model;
+@using HelloBlazor.Client.Shared;
 <h1 class="mb-3 mt-3">Add Product</h1>
 
 <EditForm EditContext="@aEditContext" OnSubmit="@handleSubmit" class="row p-3">
@@ -22,7 +23,8 @@
         <label for="Category">Category</label>
         <InputSelect id="Category" @bind-Value="aProduct.Category" class="form-select">
             <option value="None">Select a category...</option>
-            @foreach (var c in categories) {
+            @foreach (var c in categories)
+            {
                 <option value=@c.Name>@c.Name</option>
             }
 
@@ -42,10 +44,24 @@
             </label>
         </div>
     </div>
+
+
     <div class="col-12 mb-3">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
+
+
 </EditForm>
+
+<ModalDialog @ref="@modalDialog" Title="Besked">
+    <div class="row">
+        <h3>Fejl...</h3>
+        <hr>
+        <p>Der SKAL vælges en kategori.</p>
+        <button class="btn btn-primary" @onclick="() => modalDialog.Close()">Close</button>
+    </div>
+</ModalDialog>
+
 
 @code {
 
@@ -61,8 +77,14 @@
         aEditContext = new EditContext(aProduct);
     }
 
-    private void handleSubmit() {
-        Console.WriteLine("handleSubmit");
+    private void handleSubmit()
+    {
+        if (aProduct.Category.Equals("None"))
+        {
+            modalDialog.Open();
+        }
     }
-    }
+
+    private ModalDialog modalDialog { get; set; }
+}
 
