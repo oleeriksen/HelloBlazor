@@ -17,6 +17,19 @@
         <label for="PublishedDate">Published Date</label>
         <InputDate id="PublishedDate" @bind-Value="aProduct.PublishedDate" class="form-control" />
     </div>
+
+    <div class="col-md-12 mb-3">
+        <label for="Category">Category</label>
+        <InputSelect id="Category" @bind-Value="aProduct.Category" class="form-select">
+            <option value="None">Select a category...</option>
+            @foreach (var c in categories) {
+                <option value=@c.Name>@c.Name</option>
+            }
+
+        </InputSelect>
+    </div>
+
+
     <div class="col-md-12 mb-3">
         <label for="Description">Description</label>
         <InputTextArea id="Description" @bind-Value="aProduct.Description" class="form-control" />
@@ -35,6 +48,10 @@
 </EditForm>
 
 @code {
+
+    ProductCategory[] categories = { new ProductCategory{Id = 1, Name = "Food"},
+        new ProductCategory{Id = 2, Name = "Non-Food"}
+    };
     private Product aProduct = new Product();
 
     private EditContext aEditContext;
