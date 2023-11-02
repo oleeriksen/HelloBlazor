@@ -21,6 +21,8 @@ namespace HelloBlazor.Client.Model
         public bool IsPublished { get; set; }
 
         public DateTime PublishedDate { get; set; } = DateTime.Now;
+
+        public string Category { get; set; } = "None";
     }
 }
 
