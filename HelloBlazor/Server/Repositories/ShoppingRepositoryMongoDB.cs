@@ -1,0 +1,70 @@
+﻿using System;
+using HelloBlazor.Shared;
+using MongoDB.Driver;
+
+namespace HelloBlazor.Server.Repositories
+{
+	public class ShoppingRepositoryMongoDB : IShoppingRepository
+	{
+        private IMongoClient client;
+        private IMongoCollection<ShoppingItem> collection;
+
+        public ShoppingRepositoryMongoDB()
+		{
+            var mongoUri = "mongodb+srv://olee58:YCx4dkQyH49XUWBg@cluster0.olmnqak.mongodb.net/?retryWrites=true&w=majority";
+
+            
+
+            try
+            {
+                client = new MongoClient(mongoUri);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("There was a problem connecting to your " +
+                    "Atlas cluster. Check that the URI includes a valid " +
+                    "username and password, and that your IP address is " +
+                    $"in the Access List. Message: {e.Message}");
+                Console.WriteLine(e);
+                Console.WriteLine();
+                return;
+            }
+
+            // Provide the name of the database and collection you want to use.
+            // If they don't already exist, the driver and Atlas will create them
+            // automatically when you first write data.
+            var dbName = "myDatabase";
+            var collectionName = "shoppingitems";
+
+            collection = client.GetDatabase(dbName)
+               .GetCollection<ShoppingItem>(collectionName);
+
+        }
+
+        public void AddItem(ShoppingItem item)
+        {
+            //db.getCollection('collection_name').find().sort({ "age" : -1}).limit(1); //max age
+            var max = collection.Find(Builders<ShoppingItem>.Filter.Empty).SortByDescending(r => r.Id).Limit(1).ToList()[0].Id;
+            item.Id = max + 1;
+            collection.InsertOne(item);
+           
+        }
+
+        public void DeleteById(int id)
+        {
+            var deleteResult = collection
+                .DeleteOne(Builders<ShoppingItem>.Filter.Where(r => r.Id == id));
+        }
+
+        public ShoppingItem[] GetAll()
+        {
+            return collection.Find(Builders<ShoppingItem>.Filter.Empty).ToList().ToArray();
+        }
+
+        public void UpdateItem(ShoppingItem item)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
