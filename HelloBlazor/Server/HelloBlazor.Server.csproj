@@ -19,8 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\HelloBlazor.Client.csproj" />
     <ProjectReference Include="..\Shared\HelloBlazor.Shared.csproj" />
+    <ProjectReference Include="..\Client\HelloBlazor.Client.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
 

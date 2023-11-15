@@ -51,10 +51,8 @@ else
 
     }
 
-    async Task Update()
-    { if (amount > cache.Count)
-        {
-
+    async Task Update(){
+        if (amount > cache.Count) {
             var newWf = await Http.GetFromJsonAsync<WeatherForecast[]>($"vejrudsigter/{amount-cache.Count}");
             cache.AddRange(newWf);
         }
@@ -72,5 +70,5 @@ else
         await Update();
 
     }
-    }
+}
 
