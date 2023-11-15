@@ -11,7 +11,7 @@ namespace HelloBlazor.Server.Repositories
 
         public ShoppingRepositoryMongoDB()
 		{
-            var mongoUri = "mongodb+srv://olee58:@cluster0.olmnqak.mongodb.net/?retryWrites=true&w=majority";
+            var mongoUri = "mongodb+srv://olee58:<password>@cluster0.olmnqak.mongodb.net/?retryWrites=true&w=majority";
 
             
 
@@ -50,8 +50,7 @@ namespace HelloBlazor.Server.Repositories
            
         }
 
-        public void DeleteById(int id)
-        {
+        public void DeleteById(int id){
             var deleteResult = collection
                 .DeleteOne(Builders<ShoppingItem>.Filter.Where(r => r.Id == id));
         }
