@@ -11,7 +11,7 @@ namespace HelloBlazor.Server.Repositories
 
         public ShoppingRepositoryMongoDB()
 		{
-            var mongoUri = "mongodb+srv://olee58:<password>@cluster0.olmnqak.mongodb.net/?retryWrites=true&w=majority";
+            var mongoUri = "mongodb+srv://olee58:YCx4dkQyH49XUWBg@cluster0.olmnqak.mongodb.net/?retryWrites=true&w=majority";
 
             
 
