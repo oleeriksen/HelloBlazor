@@ -14,7 +14,7 @@ public class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages();
 
-        builder.Services.AddSingleton<IShoppingRepository, ShoppingRepositoryMongoDB>();
+        builder.Services.AddSingleton<IShoppingRepository, ShoppingRepositoryInMemory>();
 
         var app = builder.Build();
 
