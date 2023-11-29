@@ -1,6 +1,8 @@
 ﻿@page "/shopping"
 @using HelloBlazor.Shared;
 @inject HttpClient Http;
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+@inject NavigationManager NavManager
 
 <h1 class="mb-3 mt-3">Shopping List</h1>
 <table class="table table-striped">
@@ -47,7 +49,7 @@
 
 
 <ModalDialog @ref="@addDialog" Title="Add Item to shoppinglist">
-    
+
 
     <EditForm EditContext="@aEditContext" class="row p-3" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator />
@@ -124,6 +126,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        var currentUser = await localStore.GetItemAsync<BEUser>("user");
+        if (currentUser == null)
+            NavManager.NavigateTo("/login");
         busyDisplayStyle = "block"; // tænd busy
         shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
         busyDisplayStyle = "none"; // sluk busy

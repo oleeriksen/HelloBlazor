@@ -1,0 +1,53 @@
+﻿@page "/login"
+@using HelloBlazor.Shared;
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+@inject NavigationManager NavManager
+
+
+<h1>Login</h1>
+
+<EditForm EditContext="@aEditContext" OnSubmit="@handleSubmit" class="row p-3">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="col-md-6 mb-3">
+        <label for="Name">Email</label>
+        <InputText id="Name" @bind-Value="currentUser.Email" class="form-control" />
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="password">Password</label>
+        <InputText type="password" placeholder="Indtast password" id="password" @bind-Value="currentUser.Password" class="form-control" />
+    </div>
+
+
+    <div class="col-12 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+
+</EditForm>
+
+@code {
+
+    private BEUser currentUser = new();
+
+    private EditContext? aEditContext;
+
+    protected override void OnInitialized()
+    {
+        aEditContext = new EditContext(currentUser);
+    }
+
+    private async Task handleSubmit()
+    {
+        if (currentUser.Password.Equals("1234"))
+        {
+            await localStore.SetItemAsync<BEUser>("user", currentUser);
+            NavManager.NavigateTo("/"); //index
+        }
+
+
+    }
+
+
+}
+
