@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HelloBlazor.Client.Model
+namespace HelloBlazor.Shared
 {
     public class Product
     {

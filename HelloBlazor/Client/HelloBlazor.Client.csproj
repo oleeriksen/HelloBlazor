@@ -24,12 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Model\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Shared\HelloBlazor.Shared.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace HelloBlazor.Client.Model
+namespace HelloBlazor.Shared
 {
     public class ToDoItem
     {

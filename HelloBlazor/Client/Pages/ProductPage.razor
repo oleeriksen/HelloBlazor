@@ -1,5 +1,5 @@
 ﻿@page "/product"
-@using HelloBlazor.Client.Model;
+@using HelloBlazor.Shared;
 @using HelloBlazor.Client.Shared;
 <h1 class="mb-3 mt-3">Add Product</h1>
 
@@ -70,7 +70,7 @@
     };
     private Product aProduct = new Product();
 
-    private EditContext aEditContext;
+    private EditContext? aEditContext;
 
     protected override void OnInitialized()
     {
@@ -85,6 +85,6 @@
         }
     }
 
-    private ModalDialog modalDialog { get; set; }
+    private ModalDialog? modalDialog { get; set; }
 }
 
