@@ -28,8 +28,27 @@
 
   <ItemGroup>
     <None Remove="Repositories\" />
+    <None Remove="Data\" />
+    <None Remove="Data\shopping.db" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Repositories\ShoppingRepositorySQLite.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Repositories\ShoppingRepositorySQLite.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Repositories\ShoppingRepositorySQLite.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\shopping.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
