@@ -1,6 +1,7 @@
 ﻿using System;
 using HelloBlazor.Shared;
 using MongoDB.Driver;
+using static MongoDB.Driver.WriteConcern;
 
 namespace HelloBlazor.Server.Repositories
 {
@@ -12,7 +13,7 @@ namespace HelloBlazor.Server.Repositories
         public ShoppingRepositoryMongoDB()
 		{
             var password = ""; //add
-            var mongoUri = $"mongodb+srv://olee58{password}:@cluster0.olmnqak.mongodb.net/?retryWrites=true&w=majority";
+            var mongoUri = $"mongodb+srv://olee58:{password}@cluster0.olmnqak.mongodb.net/?retryWrites=true&w=majority";
 
             
 
@@ -58,12 +59,16 @@ namespace HelloBlazor.Server.Repositories
 
         public ShoppingItem[] GetAll()
         {
-            return collection.Find(Builders<ShoppingItem>.Filter.Empty).ToList().ToArray();
+           return collection.Find(Builders<ShoppingItem>.Filter.Empty).ToList().ToArray();
         }
 
         public void UpdateItem(ShoppingItem item)
         {
-            throw new NotImplementedException();
+            var updateDef = Builders<ShoppingItem>.Update
+                 .Set(x => x.Amount, item.Amount)
+                 .Set(x => x.Description, item.Description)
+                 .Set(x => x.Done, item.Done);
+            collection.UpdateOne(x => x.Id == item.Id, updateDef);
         }
     }
 }

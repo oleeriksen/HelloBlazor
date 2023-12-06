@@ -94,78 +94,81 @@
 @code {
 
     private string busyDisplayStyle = "none";
-    private ShoppingItem shoppingItem = new ShoppingItem();
+        private ShoppingItem shoppingItem = new ShoppingItem();
 
-    private ShoppingItem[]? shoppingList = new ShoppingItem[0];
+        private ShoppingItem[]? shoppingList = new ShoppingItem[0];
 
-    private EditContext aEditContext;
+        private EditContext aEditContext;
 
-    protected override void OnInitialized()
-    {
-        aEditContext = new EditContext(shoppingItem);
-    }
-
-    public async Task HandleValidSubmit()
-    {
-        await AddShoppingItem();
-        addDialog.Close();
-    }
-
-    private async Task AddShoppingItem()
-    {
-        await Http.PostAsJsonAsync<ShoppingItem>("api/shopping/add", shoppingItem);
-        Console.WriteLine("Klient: add " + shoppingItem.Name + " " + shoppingItem.Price);
-        shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
-        shoppingItem = new(); // clear fields in form
-    }
-
-    public string boolAsText(bool b)
-    {
-        return b ? "YES" : "NO";
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var currentUser = await localStore.GetItemAsync<BEUser>("user");
-        if (currentUser == null)
-            NavManager.NavigateTo("/login");
-        busyDisplayStyle = "block"; // tænd busy
-        shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
-        busyDisplayStyle = "none"; // sluk busy
-    }
-
-    private async Task DeleteShoppingItem(ShoppingItem item)
-    {
-
-        await Http.DeleteAsync($"api/shopping/delete/{item.Id}");
-
-        shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
-
-        StateHasChanged();
-
-    }
-
-    private async Task UpdateShoppingItem(ShoppingItem item)
-    {
-        item.Done = !item.Done;
-        await Http.PutAsJsonAsync<ShoppingItem>("api/shopping/update", item);
-
-        //shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
-
-        //StateHasChanged();
-
-    }
-
-    private decimal TotalPrice
-    {
-        get
+        protected override void OnInitialized()
         {
-            if (shoppingList == null)
-                return 0;
-            return shoppingList.Select(item => item.Amount * item.Price).Sum();
+            aEditContext = new EditContext(shoppingItem);
         }
-    }
 
-    private ModalDialog addDialog { get; set; }
-}
+        public async Task HandleValidSubmit()
+        {
+            await AddShoppingItem();
+            addDialog.Close();
+        }
+
+        private async Task AddShoppingItem()
+        {
+            await Http.PostAsJsonAsync<ShoppingItem>("api/shopping/add", shoppingItem);
+            Console.WriteLine("Klient: add " + shoppingItem.Name + " " + shoppingItem.Price);
+            shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
+            shoppingItem = new(); // clear fields in form
+        }
+
+        public string boolAsText(bool b)
+        {
+            return b ? "YES" : "NO";
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            var currentUser = await localStore.GetItemAsync<BEUser>("user");
+            if (currentUser == null)
+            {
+                NavManager.NavigateTo("/login");
+                return;
+            }
+            busyDisplayStyle = "block"; // tænd busy
+            shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
+            busyDisplayStyle = "none"; // sluk busy
+        }
+
+        private async Task DeleteShoppingItem(ShoppingItem item)
+        {
+
+            await Http.DeleteAsync($"api/shopping/delete/{item.Id}");
+
+            shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
+
+            StateHasChanged();
+
+        }
+
+        private async Task UpdateShoppingItem(ShoppingItem item)
+        {
+            item.Done = !item.Done;
+            await Http.PutAsJsonAsync<ShoppingItem>("api/shopping/update", item);
+
+            //shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
+
+            //StateHasChanged();
+
+        }
+
+        private decimal TotalPrice
+        {
+            get
+            {
+                if (shoppingList == null)
+                    return 0;
+                return shoppingList.Select(item => item.Amount * item.Price).Sum();
+            }
+        }
+
+        private ModalDialog addDialog { get; set; }
+    }
 
