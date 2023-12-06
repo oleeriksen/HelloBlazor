@@ -42,7 +42,9 @@
         if (currentUser.Password.Equals("1234"))
         {
             await localStore.SetItemAsync<BEUser>("user", currentUser);
-            NavManager.NavigateTo("/"); //index
+            var target = await localStore.GetItemAsStringAsync("target");
+
+            NavManager.NavigateTo(target);
         }
 
 
