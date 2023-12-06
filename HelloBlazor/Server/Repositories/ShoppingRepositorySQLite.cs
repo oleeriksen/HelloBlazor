@@ -4,11 +4,13 @@ using Microsoft.Data.Sqlite;
 
 namespace HelloBlazor.Server.Repositories
 {
-	public class ShoppingRepositorySQLite : IShoppingRepository
-	{
-        private const string connectionString = @"Data Source=//Users/ole/Data/shopping.db";
-        public ShoppingRepositorySQLite(){
-		}
+    public class ShoppingRepositorySQLite : IShoppingRepository
+    {
+        private const string connectionString = @"Data Source=Data/shopping.db";
+
+        public ShoppingRepositorySQLite()
+        {
+        }
 
         public void AddItem(ShoppingItem item)
         {
@@ -22,7 +24,7 @@ namespace HelloBlazor.Server.Repositories
                 command.Parameters.AddWithValue("$price", item.Price);
                 command.Parameters.AddWithValue("$amount", item.Amount);
                 command.Parameters.AddWithValue("$description", item.Description);
-                command.Parameters.AddWithValue("$done", item.Done ? 1: 0);
+                command.Parameters.AddWithValue("$done", item.Done ? 1 : 0);
                 command.Parameters.AddWithValue("$shop", item.Shop);
                 command.ExecuteNonQuery();
             }
@@ -60,13 +62,19 @@ namespace HelloBlazor.Server.Repositories
                         var price = reader.GetDecimal(2);
                         var amount = reader.GetInt32(3);
                         var description = reader.GetString(4);
-                        var done = reader.GetInt32(5) == 0 ? false: true ;
+                        var done = reader.GetInt32(5) == 0 ? false : true;
                         var shop = reader.GetString(6);
 
-                        var si = new ShoppingItem { Id = id, Name = name,
-                                                    Price = price, Amount = amount,
-                                                    Description = description,
-                                                    Done = done, Shop = shop };
+                        var si = new ShoppingItem
+                        {
+                            Id = id,
+                            Name = name,
+                            Price = price,
+                            Amount = amount,
+                            Description = description,
+                            Done = done,
+                            Shop = shop
+                        };
                         result.Add(si);
                     }
                 }
@@ -83,10 +91,12 @@ namespace HelloBlazor.Server.Repositories
 
                 command.CommandText = @"UPDATE shoppingitem SET Done = $done WHERE id = $id";
                 command.Parameters.AddWithValue("$id", item.Id);
-                command.Parameters.AddWithValue("$done", item.Done ? 1: 0);
+                command.Parameters.AddWithValue("$done", item.Done ? 1 : 0);
                 command.ExecuteNonQuery();
             }
         }
     }
 }
+
+
 
