@@ -22,6 +22,11 @@ namespace HelloBlazor.Server.Repositories
 
         public ShoppingItem[] GetAll() => mProducts.ToArray();
 
+        public ShoppingItem[] GetAllByShop(string shop)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateItem(ShoppingItem item){
             DeleteById(item.Id);
             mProducts.Add(item);

@@ -12,7 +12,7 @@ namespace HelloBlazor.Server.Repositories
 
         public ShoppingRepositoryMongoDB()
 		{
-            var password = ""; //add
+            var password = "YCx4dkQyH49XUWBg"; //add
             var mongoUri = $"mongodb+srv://olee58:{password}@cluster0.olmnqak.mongodb.net/?retryWrites=true&w=majority";
 
             
@@ -60,6 +60,13 @@ namespace HelloBlazor.Server.Repositories
         public ShoppingItem[] GetAll()
         {
            return collection.Find(Builders<ShoppingItem>.Filter.Empty).ToList().ToArray();
+        }
+
+        public ShoppingItem[] GetAllByShop(string shop)
+        {
+            var filter = Builders<ShoppingItem>.Filter.Where(r => r.Shop.Equals(shop));
+            return collection.Find(filter).ToList().ToArray();
+
         }
 
         public void UpdateItem(ShoppingItem item)

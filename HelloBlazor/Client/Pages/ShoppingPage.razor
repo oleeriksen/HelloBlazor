@@ -92,13 +92,18 @@
 
 
 @code {
-
+    // Style for billede der vises når data hentes. Se
+    // OnInitializedAsync().
     private string busyDisplayStyle = "none";
+
+    // Objekt for formen der vises modal
     private ShoppingItem shoppingItem = new ShoppingItem();
 
+    // container for listen
     private ShoppingItem[]? shoppingList = new ShoppingItem[0];
 
-    private EditContext aEditContext;
+    // kontekst for formen
+    private EditContext? aEditContext;
 
     protected override void OnInitialized()
     {
@@ -154,13 +159,10 @@
     {
         item.Done = !item.Done;
         await Http.PutAsJsonAsync<ShoppingItem>("api/shopping/update", item);
-
-        //shoppingList = await Http.GetFromJsonAsync<ShoppingItem[]>("api/shopping/getall");
-
-        //StateHasChanged();
-
     }
 
+    // Beregner total pris for elementer i listen - hvis
+    // den er tom så 0
     private decimal TotalPrice
     {
         get
@@ -171,6 +173,7 @@
         }
     }
 
-    private ModalDialog addDialog { get; set; }
+    //Objekt for modal dialogen hvor der oprettes data
+    private ModalDialog? addDialog { get; set; }
     }
 

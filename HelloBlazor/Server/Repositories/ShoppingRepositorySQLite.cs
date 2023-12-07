@@ -82,6 +82,11 @@ namespace HelloBlazor.Server.Repositories
             return result.ToArray();
         }
 
+        public ShoppingItem[] GetAllByShop(string shop)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateItem(ShoppingItem item)
         {
             using (var connection = new SqliteConnection(connectionString))

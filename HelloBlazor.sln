@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloBlazor.Client", "Hello
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloBlazor.Shared", "HelloBlazor\Shared\HelloBlazor.Shared.csproj", "{E66FDD84-7C4E-4383-878B-3402456CBA6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAPI", "TestAPI\TestAPI.csproj", "{AD86D8E2-5E0A-4F60-8498-E18391D5E871}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E66FDD84-7C4E-4383-878B-3402456CBA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E66FDD84-7C4E-4383-878B-3402456CBA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E66FDD84-7C4E-4383-878B-3402456CBA6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD86D8E2-5E0A-4F60-8498-E18391D5E871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD86D8E2-5E0A-4F60-8498-E18391D5E871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD86D8E2-5E0A-4F60-8498-E18391D5E871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD86D8E2-5E0A-4F60-8498-E18391D5E871}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

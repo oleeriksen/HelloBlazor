@@ -24,6 +24,14 @@ namespace HelloBlazor.Server.Controllers
             return mRepo.GetAll();
         }
 
+        [HttpGet]
+        [Route("getallByShop/{shop:alpha}")]
+        public IEnumerable<ShoppingItem> GetAllByShop(string shop)
+        {
+            return mRepo.GetAllByShop(shop);
+        }
+
+
         [HttpPost]
         [Route("add")]
         public void AddItem(ShoppingItem product){
