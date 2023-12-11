@@ -44,7 +44,7 @@
             await localStore.SetItemAsync<BEUser>("user", currentUser);
             var target = await localStore.GetItemAsStringAsync("target");
 
-            NavManager.NavigateTo(target);
+            NavManager.NavigateTo(target, true);
         }
 
 
