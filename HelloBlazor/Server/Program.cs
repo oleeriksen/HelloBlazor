@@ -15,6 +15,7 @@ public class Program
         builder.Services.AddRazorPages();
 
         builder.Services.AddSingleton<IShoppingRepository, ShoppingRepositorySQLite>();
+        builder.Services.AddSingleton<ILoginRepository, LoginRepositorySQLite>();
 
         var app = builder.Build();
 
